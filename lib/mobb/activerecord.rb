@@ -1,4 +1,4 @@
-require 'sinatra/base'
+require 'mobb/base'
 require 'active_record'
 require 'active_support/core_ext/hash/keys'
 
@@ -7,7 +7,7 @@ require 'pathname'
 require 'yaml'
 require 'erb'
 
-module Sinatra
+module Mobb
   module ActiveRecordHelper
     def database
       settings.database

@@ -1,6 +1,6 @@
-# Sinatra ActiveRecord Extension
+# Mobb ActiveRecord Extension
 
-Extends [Sinatra](http://www.sinatrarb.com/) with extension methods and Rake
+Extends [Mobb](https://github.com/kinoppyd/mobb) with extension methods and Rake
 tasks for dealing with an SQL database using the
 [ActiveRecord ORM](https://github.com/rails/rails/tree/master/activerecord).
 
@@ -10,17 +10,17 @@ Put it in your `Gemfile`, along with the adapter of your database. For
 simplicity, let's assume you're using SQLite:
 
 ```ruby
-gem "sinatra-activerecord"
+gem "mobb-activerecord"
 gem "sqlite3"
 gem "rake"
 ```
 
-Now require it in your Sinatra application, and establish the database
+Now require it in your Mobb application, and establish the database
 connection:
 
 ```ruby
 # app.rb
-require "sinatra/activerecord"
+require "mobb/activerecord"
 
 set :database, {adapter: "sqlite3", database: "foo.sqlite3"}
 # or set :database_file, "path/to/database.yml"
@@ -30,12 +30,12 @@ If you have a `config/database.yml`, it will automatically be loaded, no need
 to specify it. Also, in production, the `$DATABASE_URL` environment variable
 will automatically be read as the database (if you haven't specified otherwise).
 
-Note that in **modular** Sinatra applications you will need to first register
+Note that in **modular** Mobb applications you will need to first register
 the extension:
 
 ```ruby
-class YourApplication < Sinatra::Base
-  register Sinatra::ActiveRecordExtension
+class YourApplication < Mobb::Base
+  register Mobb::ActiveRecordExtension
 end
 ```
 
@@ -43,7 +43,7 @@ Now require the rake tasks and your app in your `Rakefile`:
 
 ```ruby
 # Rakefile
-require "sinatra/activerecord/rake"
+require "mobb/activerecord/rake"
 
 namespace :db do
   task :load_config do
@@ -109,19 +109,19 @@ end
 ```
 
 You can put your models anywhere you want, only remember to require them if
-they're in a separate file, and that they're loaded after `require "sinatra/activerecord"`.
+they're in a separate file, and that they're loaded after `require "mobb/activerecord"`.
 
 Now everything just works:
 
 ```ruby
-get '/users' do
-  @users = User.all
-  erb :index
+on 'list users' do
+  users = User.all
+  users.map{ |u| "- #{u.name}"}.join("\n")
 end
 
-get '/users/:id' do
-  @user = User.find(params[:id])
-  erb :show
+on /user (\w+)/ do |name|
+  user = User.find_by(name: name)
+  "#{user.id} : #{user.name}"
 end
 ```
 
@@ -139,11 +139,12 @@ end
 ## History
 
 This gem was made in 2009 by Blake Mizerany, creator of Sinatra.
+And forked by Janko Marohnić to improve on.
 
 ## Social
 
-You can follow me on Twitter, I'm [@jankomarohnic](http://twitter.com/jankomarohnic).
+You can follow me on Twitter, I'm [@GhostBrain](http://twitter.com/GhostBrain).
 
 ## License
 
-[MIT](https://github.com/janko-m/sinatra-activerecord/blob/master/LICENSE)
+[MIT](https://github.com/kinoppyd/mobb-activerecord/blob/master/LICENSE)

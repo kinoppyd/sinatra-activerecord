@@ -1,15 +1,15 @@
 # encoding:utf-8
 
 Gem::Specification.new do |gem|
-  gem.name         = "sinatra-activerecord"
-  gem.version      = "2.0.13"
+  gem.name         = "mobb-activerecord"
+  gem.version      = "0.1.0"
 
-  gem.description  = "Extends Sinatra with ActiveRecord helpers."
+  gem.description  = "Extends mobb with ActiveRecord helpers."
   gem.summary      = gem.description
-  gem.homepage     = "http://github.com/janko-m/sinatra-activerecord"
+  gem.homepage     = "http://github.com/kinoppyd/mobb-activerecord"
 
-  gem.authors      = ["Blake Mizerany", "Janko Marohnić"]
-  gem.email        = "janko.marohnic@gmail.com"
+  gem.authors      = ["Blake Mizerany", "Janko Marohnić", "kinoppyd"]
+  gem.email        = "WhoIsDissolvedGirl+github@gmail.com"
 
   gem.license      = "MIT"
 
@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 1.9.2"
 
-  gem.add_dependency "sinatra", ">= 1.0"
+  gem.add_dependency "mobb", ">= 0.4"
   gem.add_dependency "activerecord", ">= 3.2"
 
   gem.add_development_dependency "rake"
